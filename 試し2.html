@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>calculation</title>
+  <meta charset="UTF-8">
+</head>
+
+<!-- -------------------------------------------------------------------------- -->
+
+  <style>
+    body {
+    font-size: 15px;
+    background-color: #fffbf4;
+    font-family: 'メイリオ', Meiryo , YuGothic,'Yu Gothic' ,sans-serif;
+　　}
+
+    #headline {
+	background-color: #FFC778;
+ 	border: solid 2px gray;
+	padding: 3px;
+    }
+    
+    table {
+	width: 600px;
+ 	border-collapse: collapse;
+	border: solid 1px black;
+    }
+  
+    table th{
+	background: #fff5e5;
+    }
+
+    p {
+  	margin: 0;
+  	line-height: 50px;
+    }
+
+    input {
+  	width: 200px;
+  	height: 50px;
+  	text-align: center;
+  	font-size: 18px;
+    }
+
+    .answer {
+  	width: 200px;
+ 	height: 50px;
+  	border: 1px solid #ccc;
+  	background-color: rgba(238, 238, 238, .5);
+  	text-align: center;
+    }
+
+    .copyButton {
+	position: absolute;
+	left: 640px;
+    }
+
+  </style>
+
+<!-- -------------------------------------------------------------------------- -->
+
+  <body>
+  	<div id="headline">
+  		<h2>金額確認</h2>
+  	</div>
+
+  	<div class="main">
+  		<p>単価と個数の数値を入力してください。</p>
+  	</div>
+
+  	<table border="1">
+  　		<tr>
+    　		<th>単価（円）</th><th>個数</th><th>総計（円）</th>
+  　		</tr>
+　　
+　　		<div class="custom-space">
+　　		<tr>
+    　		<td><input type="number" id="A1"></td>
+			<td><input type="number" id="B1">
+			</td><td><p class="answer" id="X1">0</p>
+		</tr>
+  　		</div>
+　	
+ 	
+	<!-- コピーボタン -->
+	<div class="copyButton">
+    	<button>総計Copy</button>
+
+	</table>
+  </body>
+
+<!-- -------------------------------------------------------------------------- -->
+
+  <script>
+	const A1 = document.getElementById('A1');
+	const B1 = document.getElementById('B1');
+	const X1 = document.getElementById('X1');
+
+	A1.addEventListener('input', () => {
+ 	X1.textContent = Number(A1.value) * Number(B1.value);
+	});
+
+	B1.addEventListener('input', () => {
+  	X1.textContent = Number(A1.value) * Number(B1.value);
+	});
+
+
+	const c = document.querySelector('X1');
+	const button = document.querySelector('button');
+
+	button.addEventListener('click', () => {
+  	if (!navigator.clipboard) {
+    	alert("このブラウザは対応していません");
+    	return;
+  	}
+
+  	navigator.clipboard.writeText(X1.textContent).then(
+    	() => {
+      	alert('Copied');
+    	},
+    	() => {
+      	alert('Failed');
+    	});
+	});
+  </script>
